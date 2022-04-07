@@ -69,15 +69,17 @@ void ZorkUL::createRooms()
 string ZorkUL::showMap()
 {
     string map;
-    map =   "[h] --- [f] --- [g] \n"
+    map =   "Map:                \n"
+            "[h] --- [f] --- [g] \n"
             "         |          \n"
             "         |          \n"
             "[c] --- [a] --- [b] --- [j] \n"
             "         |          \n"
             "         |          \n"
-            "[i] --- [d] --- [e] \n";
+            "[i] --- [d] --- [e] \n"
+            "\nCurrent Room:    \n";
 
-    return map;
+    return map + currentRoom->longDescription() + "\n";
 }
 
 /*
@@ -125,7 +127,7 @@ string ZorkUL::displayItems()
     return currentRoom->displayItem();
 }
 
-// Function to tell the player what room they are currently in
+// A getter to inform the player what room they are in when they enter a new room
 Room ZorkUL::getCurrentRoom()
 {
     return *currentRoom;
