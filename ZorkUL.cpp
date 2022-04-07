@@ -19,6 +19,7 @@ ZorkUL::ZorkUL()
     srand(time(0));
 }
 
+// Function to create all of the rooms and store them in an array of pointers for ease of access
 void ZorkUL::createRooms()
 {
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
@@ -49,17 +50,17 @@ void ZorkUL::createRooms()
         rooms.push_back(*j);
 
 // Sets the available exits for each room
-//             (N, E, S, W)
-	a->setExits(f, b, d, c);
-    b->setExits(NULL, j, NULL, a);
-	c->setExits(NULL, a, NULL, NULL);
-	d->setExits(a, e, NULL, i);
-	e->setExits(NULL, NULL, NULL, d);
-	f->setExits(NULL, g, a, h);
-	g->setExits(NULL, NULL, NULL, f);
-	h->setExits(NULL, f, NULL, NULL);
-    i->setExits(NULL, d, NULL, NULL);
-    j->setExits(NULL, NULL, NULL, b);
+//             (North,  East,   South,  West)
+    a->setExits(f,      b,      d,      c);
+    b->setExits(NULL,   j,      NULL,   a);
+    c->setExits(NULL,   a,      NULL,   NULL);
+    d->setExits(a,      e,      NULL,   i);
+    e->setExits(NULL,   NULL,   NULL,   d);
+    f->setExits(NULL,   g,      a,      h);
+    g->setExits(NULL,   NULL,   NULL,   f);
+    h->setExits(NULL,   f,      NULL,   NULL);
+    i->setExits(NULL,   d,      NULL,   NULL);
+    j->setExits(NULL,   NULL,   NULL,   b);
 
     currentRoom = a; // Sets the default starting room as room a
 }
@@ -68,13 +69,13 @@ void ZorkUL::createRooms()
 string ZorkUL::showMap()
 {
     string map;
-    map =   "[h] --- [f] --- [g]"
-            "         |         "
-            "         |         "
-            "[c] --- [a] --- [b] --- [j]"
-            "         |         "
-            "         |         "
-            "[i] --- [d] --- [e]";
+    map =   "[h] --- [f] --- [g] \n"
+            "         |          \n"
+            "         |          \n"
+            "[c] --- [a] --- [b] --- [j] \n"
+            "         |          \n"
+            "         |          \n"
+            "[i] --- [d] --- [e] \n";
 
     return map;
 }
@@ -95,16 +96,18 @@ void ZorkUL::playerName() {
 // Function to welcome the player to the game
 string ZorkUL::printWelcome()
 {
-    return "Welcome to Zork! \n"
-           "Click on the *Help* button for instructions on how to use the controls";
+    return "Welcome to this absolute beauty of a Zork clone! \n"
+           "I mean it's just so much better than the original... \n"
+           "They didnt even have buttons... \n"
+           "\n Click on the *Help* button for instructions on how to use the controls \n";
 }
 
 // Function to display the instructions on how to use the controls
 string ZorkUL::printHelp()
 {
     return "Click on the directional buttons according to the direction you want to go \n"
-           "Click on the teleport button to be teleported to a random room"
-           "Click on the map button to see the map";
+           "Click on the teleport button to be teleported to a random room \n"
+           "Click on the map button to see the map\n";
 
 }
 
@@ -112,22 +115,17 @@ string ZorkUL::printHelp()
 string ZorkUL::teleport()
 {
     currentRoom = &rooms.at((int) rand() % rooms.size());
-
-    if (currentRoom == nullptr) {
-        return "Something went wrong with the teleport spell";
-    }
-    else
-    {
-        return currentRoom->longDescription();
-    }
+        return currentRoom->longDescription() + "\n I warned you, theres no doors now. \n I bet you wished you listened :)";
 }
 
+
+// Function to list all of the items in a room
 string ZorkUL::displayItems()
 {
     return currentRoom->displayItem();
 }
 
-// Tells the player what room they are currently in
+// Function to tell the player what room they are currently in
 Room ZorkUL::getCurrentRoom()
 {
     return *currentRoom;
@@ -139,7 +137,7 @@ string ZorkUL::goToRoom(string direction)
     Room* nextRoom = currentRoom->nextRoom(direction);
 
     if (nextRoom == NULL) {
-        return "no room in that direction. try another way";
+        return "Thats a wall... maybe try like I don't know..? A door!";
     } else {
         currentRoom = nextRoom;
         return currentRoom->longDescription();
