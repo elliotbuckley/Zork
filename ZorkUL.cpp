@@ -1,7 +1,9 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include "ZorkUL.h"
 
 using namespace std;
-#include "ZorkUL.h"
 
 /*
 int main(int argc, char argv[]) {
