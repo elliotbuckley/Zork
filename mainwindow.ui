@@ -17,9 +17,9 @@
    <widget class="QTextEdit" name="gameText">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>511</width>
+      <x>20</x>
+      <y>60</y>
+      <width>761</width>
       <height>221</height>
      </rect>
     </property>
@@ -27,13 +27,20 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>420</y>
-      <width>254</width>
-      <height>80</height>
+      <x>70</x>
+      <y>320</y>
+      <width>431</width>
+      <height>191</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="northButton">
+       <property name="text">
+        <string>North</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QPushButton" name="westButton">
        <property name="text">
@@ -55,14 +62,53 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="northButton">
+     <item row="1" column="1">
+      <widget class="QPushButton" name="teleportButton">
        <property name="text">
-        <string>North</string>
+        <string>Teleport</string>
        </property>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>330</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="mapButton">
+       <property name="text">
+        <string>Map</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="currentRoom">
+       <property name="text">
+        <string>Current Room?</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="helpButton">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>10</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Help</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
