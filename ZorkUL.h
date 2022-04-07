@@ -7,26 +7,32 @@
 #include "item.h"
 #include <iostream>
 #include <string>
+#include <vector>
+
 using namespace std;
 
 class ZorkUL {
+
 private:
-        Parser parser;
-        vector<Room*> rooms;
-        Room *currentRoom;
-        void createRooms();
-        void printWelcome();
-        bool processCommand(Command command);
-        void printHelp();
-        void goRoom(Command command);
-        void createItems();
-        void displayItems();
-        void teleport(string direction);
+    Parser parser;
+    vector <Room> rooms;
+    Room *currentRoom;
+    void createRooms();
+    bool processCommand(Command command);
+    void goRoom(Command command);
+    void createItems();
+    string displayItems();
+    void playerName();
 
 public:
 	ZorkUL();
 	void play();
-	string go(string direction);
+    string goToRoom(string direction);
+    string printWelcome();
+    string printHelp();
+    string teleport();
+    string showMap();
+    Room getCurrentRoom();
 };
 
 #endif /*ZORKUL_H_*/

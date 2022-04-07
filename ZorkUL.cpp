@@ -3,44 +3,50 @@
 using namespace std;
 #include "ZorkUL.h"
 
+/*
 int main(int argc, char argv[]) {
 	ZorkUL temp;
 	temp.play();
 	return 0;
 }
+*/
 
-ZorkUL::ZorkUL() {
+ZorkUL::ZorkUL()
+{
 	createRooms();
+    srand(time(0));
 }
 
-void ZorkUL::createRooms()  {
+void ZorkUL::createRooms()
+{
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
 
-	a = new Room("a");
-            a->addItem(new Item("x", 1, 11));
+    a = new Room("a");
+            a->addItem(new Item("x", 1, 11)); //adds items to the room
             a->addItem(new Item("y", 2, 22));
-        rooms.push_back(a);
+        rooms.push_back(*a); //adds the room to the vector rooms
 	b = new Room("b");
             b->addItem(new Item("xx", 3, 33));
             b->addItem(new Item("yy", 4, 44));
-        rooms.push_back(b);
+        rooms.push_back(*b);
 	c = new Room("c");
-        rooms.push_back(c);
+        rooms.push_back(*c);
 	d = new Room("d");
-        rooms.push_back(d);
+        rooms.push_back(*d);
 	e = new Room("e");
-        rooms.push_back(e);
+        rooms.push_back(*e);
 	f = new Room("f");
-        rooms.push_back(f);
+        rooms.push_back(*f);
 	g = new Room("g");
-        rooms.push_back(g);
+        rooms.push_back(*g);
 	h = new Room("h");
-        rooms.push_back(h);
+        rooms.push_back(*h);
 	i = new Room("i");
-        rooms.push_back(i);
+        rooms.push_back(*i);
     j = new Room("j");
-        rooms.push_back(j);
+        rooms.push_back(*j);
 
+// Sets the available exits for each room
 //             (N, E, S, W)
 	a->setExits(f, b, d, c);
     b->setExits(NULL, j, NULL, a);
@@ -53,44 +59,100 @@ void ZorkUL::createRooms()  {
     i->setExits(NULL, d, NULL, NULL);
     j->setExits(NULL, NULL, NULL, b);
 
-        currentRoom = a;
+    currentRoom = a; // Sets the default starting room as room a
 }
 
-/**
- *  Main play routine.  Loops until end of play.
- */
-void ZorkUL::play() {
-	printWelcome();
+// Function to allow the player to see the map
+string ZorkUL::showMap()
+{
+    string map;
+    map =   "[h] --- [f] --- [g]"
+            "         |         "
+            "         |         "
+            "[c] --- [a] --- [b] --- [j]"
+            "         |         "
+            "         |         "
+            "[i] --- [d] --- [e]";
 
-	// Enter the main command loop.  Here we repeatedly read commands and
-	// execute them until the ZorkUL game is over.
-
-	bool finished = false;
-	while (!finished) {
-		// Create pointer to command and give it a command.
-		Command* command = parser.getCommand();
-		// Pass dereferenced command and check for end of game.
-		finished = processCommand(*command);
-		// Free the memory allocated by "parser.getCommand()"
-		//   with ("return new Command(...)")
-		delete command;
-	}
-	cout << endl;
-	cout << "end" << endl;
+    return map;
 }
 
-void ZorkUL::printWelcome() {
-	cout << "start"<< endl;
-	cout << "info for help"<< endl;
-	cout << endl;
-	cout << currentRoom->longDescription() << endl;
+/*
+// Function to allow the player to create thier name
+void ZorkUL::playerName() {
+    string name;
+
+    cout << "Enter your name: ";
+    cin >> name;
+
+    cout << "Your name is " << name << endl;
+    cout << endl; // Second endl just makes it look neater in the console :)
 }
+*/
+
+// Function to welcome the player to the game
+string ZorkUL::printWelcome()
+{
+    return "Welcome to Zork! \n"
+           "Click on the *Help* button for instructions on how to use the controls";
+}
+
+// Function to display the instructions on how to use the controls
+string ZorkUL::printHelp()
+{
+    return "Click on the directional buttons according to the direction you want to go \n"
+           "Click on the teleport button to be teleported to a random room"
+           "Click on the map button to see the map";
+
+}
+
+// Function for teleporting the player to a random room
+string ZorkUL::teleport()
+{
+    currentRoom = &rooms.at((int) rand() % rooms.size());
+
+    if (currentRoom == nullptr) {
+        return "Something went wrong with the teleport spell";
+    }
+    else
+    {
+        return currentRoom->longDescription();
+    }
+}
+
+string ZorkUL::displayItems()
+{
+    return currentRoom->displayItem();
+}
+
+// Tells the player what room they are currently in
+Room ZorkUL::getCurrentRoom()
+{
+    return *currentRoom;
+}
+
+// Function for moving between the rooms, returns a message if there is no room in the direction selected
+string ZorkUL::goToRoom(string direction)
+{
+    Room* nextRoom = currentRoom->nextRoom(direction);
+
+    if (nextRoom == NULL) {
+        return "no room in that direction. try another way";
+    } else {
+        currentRoom = nextRoom;
+        return currentRoom->longDescription();
+    }
+}
+
+
 
 /**
  * Given a command, process (that is: execute) the command.
  * If this command ends the ZorkUL game, true is returned, otherwise false is
  * returned.
  */
+
+/*
 bool ZorkUL::processCommand(Command command) {
 	if (command.isUnknown()) {
 		cout << "invalid input"<< endl;
@@ -128,9 +190,9 @@ bool ZorkUL::processCommand(Command command) {
             cout << "item is not in room" << endl;
         else
             cout << "item is in room" << endl;
-            cout << "index number " << + location << endl;
-            cout << endl;
-            cout << currentRoom->longDescription() << endl;
+        cout << "index number " << + location << endl;
+        cout << endl;
+        cout << currentRoom->longDescription() << endl;
         }
     }
 
@@ -138,10 +200,10 @@ bool ZorkUL::processCommand(Command command) {
     {
 
     }
-    /*
+
     {
     if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
+        cout << "incomplete input"<< endl;
         }
         else
             if (command.hasSecondWord()) {
@@ -151,52 +213,9 @@ bool ZorkUL::processCommand(Command command) {
     }
 */
 
-    else if (commandWord.compare("teleport") == 0)
-       {
-           if (!command.hasSecondWord()){
-               cout << "incomplete input" << endl;
-           }
-           else{
-               teleport(command.getSecondWord());
-               cout << currentRoom->longDescription() << endl;
-           }
-       }
-
-
-    else if (commandWord.compare("quit") == 0) {
-		if (command.hasSecondWord())
-			cout << "overdefined input"<< endl;
-		else
-			return true; /**signal to quit*/
-	}
-	return false;
-}
 /** COMMANDS **/
-void ZorkUL::printHelp() {
-	cout << "valid inputs are; " << endl;
-	parser.showCommands();
 
-}
-
-void ZorkUL::goRoom(Command command) {
-	if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
-		return;
-	}
-
-	string direction = command.getSecondWord();
-
-	// Try to leave current room.
-	Room* nextRoom = currentRoom->nextRoom(direction);
-
-	if (nextRoom == NULL)
-		cout << "underdefined input"<< endl;
-	else {
-		currentRoom = nextRoom;
-		cout << currentRoom->longDescription() << endl;
-	}
-}
-
+/*
 string ZorkUL::go(string direction) {
 	//Make the direction lowercase
 	//transform(direction.begin(), direction.end(), direction.begin(),:: tolower);
@@ -210,20 +229,32 @@ string ZorkUL::go(string direction) {
 		return currentRoom->longDescription();
 	}
 }
+*/
 
-void ZorkUL::teleport(string room){
-    if (room.compare("rand") == 0){
-        unsigned int roomSize = rooms.size();
-        unsigned int randRoom = rand() % roomSize;
-        currentRoom = rooms[randRoom];
-    }
-    else{
-        for (unsigned int i = 0; i < rooms.size(); i++)
-        {
-            if (rooms[i]->shortDescription().compare(room) == 0)
-                currentRoom = rooms[i];
-        }
-    }
+/**
+ *  Main play routine.  Loops until end of play.
+ */
 
+/*
+void ZorkUL::play() {
+    playerName();
+    printWelcome();
+
+    // Enter the main command loop.  Here we repeatedly read commands and
+    // execute them until the ZorkUL game is over.
+
+    bool finished = false;
+    while (!finished) {
+        // Create pointer to command and give it a command.
+        Command* command = parser.getCommand();
+        // Pass dereferenced command and check for end of game.
+        finished = processCommand(*command);
+        // Free the memory allocated by "parser.getCommand()"
+        //   with ("return new Command(...)")
+        delete command;
+    }
+    cout << endl;
+    cout << "end" << endl;
 }
+*/
 
