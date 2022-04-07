@@ -2,31 +2,45 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidget>
+#include "ZorkUL.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui
+{
+    class MainWindow;
+}
+
+
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+    friend class Room;
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
-    void on_northButton_clicked();
+    void on_mapButton_clicked();
 
-    void on_eastButton_clicked();
+    void on_currentRoom_clicked();
+
+    void on_helpButton_clicked();
+
+    void on_northButton_clicked();
 
     void on_southButton_clicked();
 
+    void on_eastButton_clicked();
+
     void on_westButton_clicked();
 
-    void on_gameText_textChanged();
+    void on_teleportButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    ZorkUL *zork = new ZorkUL();
+    void goRoom(string direction);
+
 };
-#endif // MAINWINDOW_H
+#endif
