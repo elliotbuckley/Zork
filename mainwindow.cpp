@@ -1,6 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <algorithm>
 
+/*
+template <typename T>
+void addItem(vector<T> v, T t)
+{
+    v.push_back(t);
+}
+*/
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
