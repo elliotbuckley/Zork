@@ -10,9 +10,10 @@ class Item {
 private:
 	string description;
 	string longDescription;
-	int weightGrams;
+    int weightGrams;
 	float value;
-	bool weaponCheck;
+    //bool weaponCheck;
+
 
 public:
     Item (string description, int inWeight, float inValue);

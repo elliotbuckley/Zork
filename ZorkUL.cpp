@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include "ZorkUL.h"
+#include "Room.h"
 
 using namespace std;
 
@@ -12,6 +13,9 @@ int main(int argc, char argv[]) {
 	return 0;
 }
 */
+
+string map;
+
 
 ZorkUL::ZorkUL()
 {
@@ -25,12 +29,10 @@ void ZorkUL::createRooms()
     Room *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
 
     a = new Room("a");
-            a->addItem(new Item("x", 1, 11)); //adds items to the room
-            a->addItem(new Item("y", 2, 22));
+            a->addItem(new Item("Torch")); //adds items to the room
         rooms.push_back(*a); //adds the room to the vector rooms
 	b = new Room("b");
-            b->addItem(new Item("xx", 3, 33));
-            b->addItem(new Item("yy", 4, 44));
+            b->addItem(new Item("Hat", 2, 22));
         rooms.push_back(*b);
 	c = new Room("c");
         rooms.push_back(*c);
@@ -68,7 +70,7 @@ void ZorkUL::createRooms()
 // Function to allow the player to see the map
 string ZorkUL::showMap()
 {
-    string map;
+    extern string map;
     map =   "Map:                \n"
             "[h] --- [f] --- [g] \n"
             "         |          \n"
@@ -82,26 +84,16 @@ string ZorkUL::showMap()
     return map + currentRoom->longDescription() + "\n";
 }
 
-/*
-// Function to allow the player to create thier name
-void ZorkUL::playerName() {
-    string name;
-
-    cout << "Enter your name: ";
-    cin >> name;
-
-    cout << "Your name is " << name << endl;
-    cout << endl; // Second endl just makes it look neater in the console :)
-}
-*/
 
 // Function to welcome the player to the game
 string ZorkUL::printWelcome()
 {
-    return "Welcome to this absolute beauty of a Zork clone! \n"
+    return "Click on the *Help* button for instructions on how to use the controls \n"
+           "\nWelcome " + name + " to this absolute beauty of a Zork clone! \n"
            "I mean it's just so much better than the original... \n"
-           "They didnt even have buttons... \n"
-           "\n Click on the *Help* button for instructions on how to use the controls \n";
+           "They didnt even have buttons... and we have seven!\n"
+           "Granted one of them is kind of broken *HINT* its the teleport button\n"
+           "\nCurrent Room: \n" + currentRoom->longDescription();
 }
 
 // Function to display the instructions on how to use the controls
@@ -130,7 +122,7 @@ string ZorkUL::displayItems()
 // A getter to inform the player what room they are in when they enter a new room
 Room ZorkUL::getCurrentRoom()
 {
-    return *currentRoom;
+    return croom;
 }
 
 // Function for moving between the rooms, returns a message if there is no room in the direction selected

@@ -14,6 +14,7 @@ namespace Ui
 
 class MainWindow : public QMainWindow
 {
+    Q_OBJECT
     friend class Room;
 
 public:
@@ -22,20 +23,13 @@ public:
 
 private slots:
     void on_mapButton_clicked();
-
-    void on_currentRoom_clicked();
-
     void on_helpButton_clicked();
-
     void on_northButton_clicked();
-
     void on_southButton_clicked();
-
     void on_eastButton_clicked();
-
     void on_westButton_clicked();
-
     void on_teleportButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;
