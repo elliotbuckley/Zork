@@ -14,7 +14,7 @@ public:
 	string getCommandWord();
 	string getSecondWord();
 	bool isUnknown();
-	bool hasSecondWord();
+    bool hasSecondWord();
 };
 
 #endif /*COMMAND_H_*/

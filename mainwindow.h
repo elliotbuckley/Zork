@@ -15,11 +15,11 @@ namespace Ui
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    friend class Room;
+    friend class Room; // friendship
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow(); // destructor used
 
 private slots:
     void on_mapButton_clicked();

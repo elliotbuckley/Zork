@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>70</y>
       <width>761</width>
-      <height>221</height>
+      <height>231</height>
      </rect>
     </property>
    </widget>
@@ -60,6 +60,9 @@
        <property name="text">
         <string>East</string>
        </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -75,7 +78,7 @@
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>330</y>
+      <y>320</y>
       <width>160</width>
       <height>80</height>
      </rect>
@@ -85,13 +88,6 @@
       <widget class="QPushButton" name="mapButton">
        <property name="text">
         <string>Map</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="currentRoom">
-       <property name="text">
-        <string>Current Room?</string>
        </property>
       </widget>
      </item>
@@ -108,6 +104,19 @@
     </property>
     <property name="text">
      <string>Help</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>10</y>
+      <width>441</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="plainText">
+     <string>The teleport button kind of removes all of the doors, and by kind of I mean it does, so use at your own risk.</string>
     </property>
    </widget>
   </widget>

@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <algorithm>
 #include <ZorkUL.h>
 
 
@@ -78,9 +77,4 @@ void MainWindow::on_teleportButton_clicked()
 {
     goRoom("teleport");
 }
-
-
-
-
-
 

@@ -10,12 +10,11 @@
 
 using namespace std;
 
-inline const string name = "Obi-Wan Kenobi";
+// Default player name (I like star wars)
+inline const string name = "Obi-Wan Kenobi"; // pre-processor directives (inline)
 
 class ZorkUL
 {
-
-//Room& croom = *currentRoom;
 
 private:
     vector <Room> rooms;
@@ -25,7 +24,7 @@ private:
 
     void createItems();
     string displayItems();
-    Room& croom = *currentRoom;
+    Room& croom = *currentRoom; // use of C++ referneces
 
 public:
 	ZorkUL();

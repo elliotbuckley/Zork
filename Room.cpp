@@ -1,10 +1,11 @@
 #include "Room.h"
 #include "Command.h"
 
-
+// Creating the room description - room name, items in room, what exits
 Room::Room(string description) {
 	this->description = description;
 }
+
 
 void Room::setExits(Room *north, Room *east, Room *south, Room *west) {
 	if (north != NULL)
@@ -41,12 +42,14 @@ Room* Room::nextRoom(string direction) {
 				// part of the "pair" (<string, Room*>) and return it.
 }
 
+// Adding items to an array
 void Room::addItem(Item *inItem) {
     //cout <<endl;
     //cout << "Just added" + inItem->getLongDescription();
     itemsInRoom.push_back(*inItem);
 }
 
+//taking the items from the array and printing them if they are in the room
 string Room::displayItem() {
     string tempString = "items in room = ";
     int sizeItems = (itemsInRoom.size());

@@ -1,4 +1,4 @@
-/*#include "Character.h"
+/* #include "Character.h"
 
 Characterx::Characterx(string description) {
 	this->description = description;
@@ -18,6 +18,5 @@ string Characterx::longDescription()
     ret += "\t"+ (*i).getLongDescription() + "\n";
   return ret;
 }
+
 */
-
-

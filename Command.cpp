@@ -15,7 +15,7 @@ Command::Command(string firstWord, string secondWord) {
  * command was not understood, the result is null.
  */
 string Command::getCommandWord() {
-	return this->commandWord;
+    return this->commandWord;
 }
 
 /**

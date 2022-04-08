@@ -1,6 +1,4 @@
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include "ZorkUL.h"
 #include "Room.h"
 
@@ -14,13 +12,13 @@ int main(int argc, char argv[]) {
 }
 */
 
+// Use of Global variable
 string map;
 
 
 ZorkUL::ZorkUL()
 {
 	createRooms();
-    srand(time(0));
 }
 
 // Function to create all of the rooms and store them in an array of pointers for ease of access
@@ -67,10 +65,18 @@ void ZorkUL::createRooms()
     currentRoom = a; // Sets the default starting room as room a
 }
 
+
+
+/*
+ * All of the below functions are called in mainwindow.cpp when their corresponding button is clicked in game
+*/
+
+
+
 // Function to allow the player to see the map
 string ZorkUL::showMap()
 {
-    extern string map;
+    extern string map; // calling the global variable
     map =   "Map:                \n"
             "[h] --- [f] --- [g] \n"
             "         |          \n"
@@ -89,7 +95,7 @@ string ZorkUL::showMap()
 string ZorkUL::printWelcome()
 {
     return "Click on the *Help* button for instructions on how to use the controls \n"
-           "\nWelcome " + name + " to this absolute beauty of a Zork clone! \n"
+           "\nWelcome " + name + " to this absolute beauty of a Zork clone! \n" // The pre-processor directive is called here
            "I mean it's just so much better than the original... \n"
            "They didnt even have buttons... and we have seven!\n"
            "Granted one of them is kind of broken *HINT* its the teleport button\n"
